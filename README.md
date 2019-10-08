@@ -5,7 +5,7 @@ Results seem to give a max radiation effect of +8K which is in accordance with t
 Sun direct and diffuse illumations are calculated using a C# european ESRA model
 Sun position calculations and the ESRA calculations are C# ports C sources available on the  the Ecole des Mines OIE Lab (see http://www.oie.mines-paristech.fr/Accueil/)
 
-Refs:
+Referencess:
 
 Steadman : 
 1994: http://www.bom.gov.au/jshess/docs/1994/steadman.pdf
