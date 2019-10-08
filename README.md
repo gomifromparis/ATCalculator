@@ -15,7 +15,8 @@ Steadman :
 
 1979 : https://wonder.cdc.gov/wonder/help/Climate/Steadman1979.PDF
 
-ESRA : 
+ESRA :
+
 https://hal.archives-ouvertes.fr/hal-00361373/document
 
 http://www.oie.mines-paristech.fr/Valorisation/Outils/Solar-Geometry/
