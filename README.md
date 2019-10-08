@@ -9,7 +9,9 @@ Referencess:
 
 Steadman : 
 1994: http://www.bom.gov.au/jshess/docs/1994/steadman.pdf
+
 1984 : https://journals.ametsoc.org/doi/pdf/10.1175/1520-0450(1984)023%3C1674:AUSOAT%3E2.0.CO;2
+
 1979 : https://wonder.cdc.gov/wonder/help/Climate/Steadman1979.PDF
 
 ESRA : 
