@@ -2,7 +2,8 @@
 This c# project will compute indoor, shaded and clear sky apparent temperatures following the Steadman 1994 paper. 
 Results seem to give a max radiation effect of +8K which is in accordance with the paper.
 
-Sun direct and diffuse illumations are calculated using a C# european ESRA model
+Sun direct and diffuse illumations are calculated using a C# european ESRA model.
+
 Sun position calculations and the ESRA calculations are C# ports C sources available on the  the Ecole des Mines OIE Lab (see http://www.oie.mines-paristech.fr/Accueil/)
 
 References:
