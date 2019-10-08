@@ -1,5 +1,6 @@
 # ATCalculator
-This c# project will compute indoor, shaded and clear sky apparent temperatures following the Steadman 1994 paper. 
+This c# project will compute indoor, shaded and clear sky apparent temperatures following the Steadman 1994 paper.
+
 Results seem to give a max radiation effect of +8K which is in accordance with the paper.
 
 Sun direct and diffuse illumations are calculated using a C# european ESRA model.
