@@ -60,6 +60,28 @@ namespace AT
         }
 
 
+        //returns solar angle in degrees just in case it's needed elsewhere
+        public static double  GetESRAIrradiances(DateTime UTCTime, double LatitudeInDegrees, double LongitudeInDegrees, int AltitudeInMeters, double LinkeTurbidity, out double Beam, out double Diffuse, out double Total)
+        {
+   
+            // ESRA model needs the Linke Turbidity factor of the atmosphere of the location, it can be found here :
+            //http://www.soda-pro.com/fr/web-services/atmosphere/linke-turbidity-factor-ozone-water-vapor-and-angstroembeta
+
+            //calculate solar altitude angle;
+            double SunAltiInDegrees = GetSolarAltitudeInDegrees(LatitudeInDegrees, LongitudeInDegrees, UTCTime);
+            double SunAltiInRadians = SunAltiInDegrees / 360 * 2 * Math.PI;
+
+            //calculate earth orbit correction, earth is 7% closer to the sun in northern winter than in northern summer 
+            double Eccentricity = GetExcentricity(UTCTime);
+
+            //call ESRA model to get beam, diffuse and global illumination, given solar angle 
+            ESRACalculator.Gc_model5_irradiance(SunAltiInRadians, Eccentricity, LinkeTurbidity, AltitudeInMeters, out Beam, out Diffuse, out Total);
+
+            return SunAltiInDegrees;
+
+
+        }
+
         //degrees in Celsius
         public static TAData Compute (double Temp, double DewPoint, double WindInMPerSec,DateTime UTCTime, double LatitudeInDegrees, double LongitudeInDegrees,int AltitudeInMeters,double LinkeTurbidity)
         {
@@ -77,25 +99,15 @@ namespace AT
 
             //now the fun part, we add clear sky illumination
             // we will compute beam and diffuse illuminations using ESRA model.
+
             // Beam illumination is QD in Steadman, Diffuse is Qd
-            // ESRA model needs the Linke Turbidity factor of the atmosphere of the location, it can be found here :
-            //http://www.soda-pro.com/fr/web-services/atmosphere/linke-turbidity-factor-ozone-water-vapor-and-angstroembeta
-
-            //calculate solar altitude angle;
-            double SunAltiInDegrees = GetSolarAltitudeInDegrees(LatitudeInDegrees, LongitudeInDegrees, UTCTime);
-            double SunAltiInRadians = SunAltiInDegrees / 360 * 2 * Math.PI;
-
-            //calculate earth orbit correction, earth is 7% closer to the sun in northern winter than in northern summer 
-            double Eccentricity = GetExcentricity(UTCTime);
-
             double QD, Qd, Qtotal;
-
-            //call ESRA model to get beam, diffuse and global illumination, given solar angle 
-            ESRACalculator.Gc_model5_irradiance(SunAltiInRadians, Eccentricity, LinkeTurbidity, AltitudeInMeters, out QD, out Qd, out Qtotal);
+            
+            double SunAltiInDegrees =GetESRAIrradiances(UTCTime, LatitudeInDegrees, LongitudeInDegrees, AltitudeInMeters, LinkeTurbidity, out QD, out Qd, out Qtotal);
+            double SunAltiInRadians = SunAltiInDegrees / 360 * 2 * Math.PI;
 
             //Calculate human projected area factor, it varies between 0.3 m2 when the sun is horizontal, to 0.1 m2 when it's vertical
             // using Steadman formula 
-
             double psi3 =     0.3014 
                             + 88E-5 * SunAltiInDegrees 
                             - 746E-7 * SunAltiInDegrees * SunAltiInDegrees 
@@ -120,6 +132,7 @@ namespace AT
 
             // Total Qg
             double Qg = Q1 + Q2 + Q3 - Q4;
+
 
             //now we can compute apparent temperature
             res.TSun = Temp + 3.48 * Pa - 0.7 * WindInMPerSec + 0.7 * Qg / (WindInMPerSec + 10) - 4.25;

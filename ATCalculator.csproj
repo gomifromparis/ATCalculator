@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ATCalculator.cs" />
     <Compile Include="OIEESRACalculator.cs" />
     <Compile Include="OIESolarCalculator.cs" />
     <Compile Include="Program.cs" />

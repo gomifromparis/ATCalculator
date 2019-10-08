@@ -3,7 +3,7 @@
 namespace OIECalculators
 {
     //ORIGINAL C CODE IS FROM OIE, Ecole des Mines de Paris, see http://www.oie.mines-paristech.fr/Valorisation/Outils/Clear-Sky-Library/
-    // I merely translated it to C#
+    // Code translated to C#
 
     public static class ESRACalculator
     {
@@ -749,7 +749,7 @@ namespace OIECalculators
            This procedure returns 0 if OK, 1 otherwise. */
         {
             int ier = 0;
-            if ((TLAM2 <= 1.0) || (m <= 0.0))
+            if ((TLAM2 < 1.0) || (m <= 0.0))
                 Bc = 0.0;
             else
                 Bc = SolarCalculator.I0 * eccentricity * Beam_trans(m, deltaR, TLAM2);

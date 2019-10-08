@@ -4,7 +4,7 @@
 namespace OIECalculators
 {
     //ORIGINAL C CODE IS FROM OIE, Ecole des Mines de Paris, see http://www.oie.mines-paristech.fr/Valorisation/Outils/Solar-Geometry/
-    // I merely translated it to C#
+    // Code translated to C#
 
     public static class SolarCalculator
     {
