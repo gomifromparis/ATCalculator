@@ -10,6 +10,7 @@ namespace ATCalculator
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
